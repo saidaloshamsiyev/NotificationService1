@@ -1,4 +1,5 @@
 package org.example.notificationservice1.config;//package org.example.authservice.config;
+
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.example.notificationservice1.deserializers.ChannelNotificationRequestDeserializer;
@@ -16,26 +17,28 @@ import java.util.Map;
 @Configuration
 public class KafkaConfig {
 
-        @Bean
-        public ConsumerFactory<String, Object> consumerFactory() {
-            Map<String,Object> props = new HashMap<>();
-            props.put(ConsumerConfig.GROUP_ID_CONFIG, "auth-service");
-            props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "159.65.119.240:9092");
-            props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-            props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ChannelNotificationRequestDeserializer.class);
-            props.put(ErrorHandlingDeserializer.VALIDATOR_CLASS,ErrorHandlingDeserializer.class);
-            props.put(JsonDeserializer.TRUSTED_PACKAGES,"*");
-            return new DefaultKafkaConsumerFactory<>(props);
-        }
+    @Bean
+    public ConsumerFactory<String, Object> consumerFactory() {
+        Map<String, Object> props = new HashMap<>();
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "auth-service");
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "159.65.119.240:9092");
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ChannelNotificationRequestDeserializer.class);
+        props.put(ErrorHandlingDeserializer.VALIDATOR_CLASS, ErrorHandlingDeserializer.class);
+        props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
+        props.put("session.timeout.ms", "3600000");
+        props.put("heartbeat.interval.ms", "3600000");
+
+        return new DefaultKafkaConsumerFactory<>(props);
+    }
 
 
-
-        @Bean
-        public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory() {
-            ConcurrentKafkaListenerContainerFactory<String, Object> factory
-                    = new ConcurrentKafkaListenerContainerFactory<>();
-            factory.setConsumerFactory(consumerFactory());
-            return factory;
-        }
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, Object> factory
+                = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(consumerFactory());
+        return factory;
+    }
 
 }
