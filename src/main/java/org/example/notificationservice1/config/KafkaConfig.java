@@ -26,9 +26,6 @@ public class KafkaConfig {
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ChannelNotificationRequestDeserializer.class);
         props.put(ErrorHandlingDeserializer.VALIDATOR_CLASS, ErrorHandlingDeserializer.class);
         props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
-        props.put("session.timeout.ms", "3600000");
-        props.put("heartbeat.interval.ms", "3600000");
-
         return new DefaultKafkaConsumerFactory<>(props);
     }
 
