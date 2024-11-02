@@ -18,7 +18,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
   kafka:
-    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:159.65.119.240:9092}
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:159.65.119.240:9092,159.65.119.240:9093,159.65.119.240:9094}
     consumer:
       group-id: auth-service
       auto-offset-reset: earliest
