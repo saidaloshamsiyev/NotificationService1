@@ -53,6 +53,9 @@ dependencies {
 
     implementation 'metube.com:metube_library:1.0.14'
 
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
+
 }
 
 dependencyManagement {
