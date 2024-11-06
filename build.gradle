@@ -51,7 +51,7 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-    implementation 'metube.com:metube_library:1.0.14'
+    implementation 'metube.com:metube_library:1.0.16'
 
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
