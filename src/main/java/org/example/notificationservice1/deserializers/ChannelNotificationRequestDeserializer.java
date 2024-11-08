@@ -36,7 +36,6 @@ public class ChannelNotificationRequestDeserializer implements Deserializer<User
 
     }
 
-
     @Override
     public void close() {
         /*Deserializer.super.close();*/
